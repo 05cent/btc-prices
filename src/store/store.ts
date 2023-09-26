@@ -1,5 +1,5 @@
 ﻿import { configureStore } from "@reduxjs/toolkit";
-import { prices } from "./slices/index.js";
+import { prices } from "./slices";
 
 const pricesStore = configureStore({
     reducer: {

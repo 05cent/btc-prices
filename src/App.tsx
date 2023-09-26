@@ -1,4 +1,4 @@
-import BtcPricesChart from './components/BtcPricesChart.jsx';
+import BtcPricesChart from './components/BtcPricesChart.tsx';
 import './App.css';
 
 const App = () => <BtcPricesChart />;
