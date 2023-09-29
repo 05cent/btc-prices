@@ -1,5 +1,5 @@
 ﻿export type Prices = {
-    prices: any[];
+    prices: any;
     timeStamp: string[];
     loading: boolean
 }

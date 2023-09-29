@@ -28,10 +28,10 @@ const BtcPricesChart = () => {
 
     useEffect(() => {
         dispatch(getPrices());
-        // const intervalId = setInterval(() => {
-        //     dispatch(getPrices());
-        // }, 15000);
-        // return () => clearInterval(intervalId);
+        const intervalId = setInterval(() => {
+            dispatch(getPrices());
+        }, 15000);
+        return () => clearInterval(intervalId);
     }, []);
 
     return (loading ? <>Loading</> :
@@ -46,7 +46,6 @@ const BtcPricesChart = () => {
                             }
                         },
                         y: {
-                            beginAtZero: true,
                             grid: {
                                 display: false
                             }
@@ -58,7 +57,7 @@ const BtcPricesChart = () => {
                         },
                         tooltip: {
                             callbacks: {
-                                title: (data: any) => `${data[0].dataset.code}-${data[0].dataset.data}`,
+                                title: (data: any) => `${data[0].dataset.curr}-${data[0].formattedValue}`,
                                 label: () => ''
                             },
                             titleMarginBottom: 0,
@@ -87,15 +86,14 @@ const BtcPricesChart = () => {
                 width={1000}
                 data={{
                     labels: timeStamp,
-                    datasets: prices.map((price: any) => ({
-                        ...price,
-                        data: price.rate.split('.')[0],
-                        fill: true,
+                    datasets: Object.keys(prices || {}).map((price: any) => ({
+                        curr: price,
+                        data: [...new Set(prices?.[price] ?? [])],
                         borderColor: '#65bd08',
                         borderWidth: 1,
                         pointBorderColor: '#4ae117',
                         pointBorderWidth: 2,
-                        pointRadius: 5
+                        pointRadius: 3
                     }))
                 }}
             />
